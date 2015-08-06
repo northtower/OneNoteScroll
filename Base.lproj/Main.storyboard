@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="desktop" translatesAutoresizingMaskIntoConstraints="NO" id="qqQ-nZ-VJ9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="103"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="mXH-Al-cR4"/>
+                                </constraints>
+                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mws-tz-FIu">
+                                <rect key="frame" x="0.0" y="100" width="600" height="500"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="qqQ-nZ-VJ9" secondAttribute="trailing" id="5d8-Rh-TVj"/>
+                            <constraint firstItem="qqQ-nZ-VJ9" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="6CT-yM-yHF"/>
+                            <constraint firstItem="qqQ-nZ-VJ9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="Inq-Nj-jDM"/>
+                            <constraint firstItem="qqQ-nZ-VJ9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Wuy-EO-tMR"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="mws-tz-FIu" secondAttribute="bottom" id="Y4B-Uy-kqa"/>
+                            <constraint firstItem="mws-tz-FIu" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="80" id="YjW-vn-UnF"/>
+                            <constraint firstItem="qqQ-nZ-VJ9" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="a3I-Wa-MEV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qqQ-nZ-VJ9" secondAttribute="trailing" constant="-16" id="fso-TG-vXe"/>
+                            <constraint firstItem="mws-tz-FIu" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="pFn-X1-MaC"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mws-tz-FIu" secondAttribute="trailing" constant="-16" id="zW9-qc-ZZW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5d8-Rh-TVj"/>
+                                <exclude reference="Wuy-EO-tMR"/>
+                                <exclude reference="a3I-Wa-MEV"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="HeadImageView" destination="qqQ-nZ-VJ9" id="p1V-1T-Ygl"/>
+                        <outlet property="StartPageScroll" destination="mws-tz-FIu" id="qmf-Eo-ycb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="desktop" width="956" height="227"/>
+    </resources>
+</document>
