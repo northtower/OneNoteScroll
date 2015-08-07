@@ -13,6 +13,7 @@
 @interface ViewController ()<UIScrollViewDelegate>{
     
     UIPageControl *_pageControl;
+    NSInteger   _nsICurrentPage;
     
 }
 
@@ -38,13 +39,19 @@
     _pageControl.currentPageIndicatorTintColor=[UIColor colorWithRed:0 green:150/255.0 blue:1 alpha:1];
     //设置总页数
     _pageControl.numberOfPages=3;
+    _nsICurrentPage = 0;
     
     [self.view addSubview:_pageControl];
     
     
 }
+
+- (void) addCustomButton{
+    
+    
+}
 //overstudy
--(void)initScrollView{
+-(void)addScrollView{
     
     CGSize oSize = [UIScreen mainScreen].applicationFrame.size;
     oSize.height -= 80;
@@ -67,6 +74,12 @@
     oImage.image = [UIImage imageNamed:@"062"];
     [_StartPageScroll addSubview:oImage];
     
+    oImage = [[UIImageView alloc]initWithFrame:CGRectMake(oSize.width * 2, 0, oSize.width, oSize.height)];
+    oImage.contentMode=UIViewContentModeScaleAspectFill;
+    oImage.image = [UIImage imageNamed:@"063"];
+    [_StartPageScroll addSubview:oImage];
+    
+    /*
     UIView * oView = [[UIView alloc]initWithFrame:CGRectMake(oSize.width * 2, 0, oSize.width, oSize.height)];
     oView.contentMode = UIViewContentModeScaleAspectFill;
     oView.backgroundColor = [UIColor colorWithRed:166/255.0 green:16/255.0 blue:224/255.0 alpha:1];
@@ -81,12 +94,12 @@
     
     [_StartPageScroll addSubview:oView];
     
-    
+    */
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initScrollView];
+    [self addScrollView];
     [self addPageController];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -103,10 +116,19 @@
     CGPoint offset=[scrollView contentOffset];
     NSLog(@"scrollViewDidEndDecelerating : X=%f" , offset.x);
     
+    if(offset.x > _nsICurrentPage * SCREEN_WIDTH){
+        //向右
+        _nsICurrentPage += 1;
+    }
+    else
+        _nsICurrentPage -= 1;
+    
+    
+    
     //移动到中间
  //   [_StartPageScroll setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:NO];
     //设置分页
- //   _pageControl.currentPage=_currentImageIndex;
+    _pageControl.currentPage=_nsICurrentPage;
     
 
 }
@@ -115,7 +137,7 @@
     
  //   NSLog(@"scrollViewDidScroll");
 }
-
+/*
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
     
     CGPoint offset=[scrollView contentOffset];
@@ -126,4 +148,5 @@
     NSLog(@"scrollViewWillEndDragging");
     
 }
+ */
 @end
