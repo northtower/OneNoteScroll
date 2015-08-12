@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "Controller/LoginAndRegister/LoginViewCtl.h"
 
 #define SCREEN_WIDTH 320
 
@@ -79,6 +80,22 @@
     oImage.image = [UIImage imageNamed:@"063"];
     [_StartPageScroll addSubview:oImage];
     
+    //注册与登陆按钮
+    UIButton *bLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    bLoginBtn.frame = CGRectMake(oSize.width * 2, 289, SCREEN_WIDTH, 50);
+    bLoginBtn.backgroundColor = [UIColor clearColor];
+    //   nameBtn.backgroundColor = [UIColor clearColor];
+    [bLoginBtn addTarget:self action:@selector(userLoginView) forControlEvents:UIControlEventTouchUpInside];
+    [_StartPageScroll addSubview:bLoginBtn];
+    
+    UIButton *bRegisterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    bRegisterBtn.frame = CGRectMake(oSize.width * 2, 289 + 50, SCREEN_WIDTH, 50);
+    bRegisterBtn.backgroundColor = [UIColor clearColor];
+    //   nameBtn.backgroundColor = [UIColor clearColor];
+    [bRegisterBtn addTarget:self action:@selector(userRegisterView) forControlEvents:UIControlEventTouchUpInside];
+    [_StartPageScroll addSubview:bRegisterBtn];
+    
+    
     /*
     UIView * oView = [[UIView alloc]initWithFrame:CGRectMake(oSize.width * 2, 0, oSize.width, oSize.height)];
     oView.contentMode = UIViewContentModeScaleAspectFill;
@@ -96,11 +113,38 @@
     
     */
 }
+-(void) addButtonClicked{
+    
+   
+}
+
+- (void) userLoginView{
+    
+    
+    UIStoryboard * storyboard = self.storyboard;
+    LoginViewCtl  * svc = [storyboard instantiateViewControllerWithIdentifier:@"SB_LoginView"];
+    
+    [svc setModalTransitionStyle:2];
+    [svc setModalPresentationStyle:UIModalPresentationCurrentContext];
+    
+    [self presentViewController:svc animated:YES completion:nil];
+     
+    
+//    LoginViewCtl *jzSpeechVC = [[LoginViewCtl alloc] init];
+//    [self.navigationController pushViewController:jzSpeechVC animated:YES];
+    
+}
+
+- (void) userRegisterView{
+    
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self addScrollView];
     [self addPageController];
+    [self addCustomButton];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -123,8 +167,6 @@
     else
         _nsICurrentPage -= 1;
     
-    
-    
     //移动到中间
  //   [_StartPageScroll setContentOffset:CGPointMake(SCREEN_WIDTH, 0) animated:NO];
     //设置分页
@@ -137,16 +179,5 @@
     
  //   NSLog(@"scrollViewDidScroll");
 }
-/*
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
-    CGPoint offset=[scrollView contentOffset];
-    NSLog(@"scrollViewWillBeginDragging：X=%f" , offset.x);
-}
-- (void)scrollViewWillEndDragging:(UIScrollView *)scrollView withVelocity:(CGPoint)velocity targetContentOffset:(inout CGPoint *)targetContentOffset{
-    
-    NSLog(@"scrollViewWillEndDragging");
-    
-}
- */
+
 @end
