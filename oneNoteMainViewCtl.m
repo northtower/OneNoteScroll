@@ -6,22 +6,50 @@
 //  Copyright (c) 2015年 northtower. All rights reserved.
 //
 
-#import "testViewCtl.h"
-#import "Views/ONTabView.h"
+#import "oneNoteMainViewCtl.h"
+#import "publicSettings.h"
+#import "docPreviewCtl.h"
 
-@interface testViewCtl ()
+
+@interface oneNoteMainViewCtl (){
+    
+    QMBTabViewController * oTabViewCtl;
+    
+    //正文数据
+    NSMutableArray *_dataSourceArray;
+    
+    docPreviewCtl * DocPreviewCtl;
+    
+}
+
+@property (nonatomic, strong) UIView *contentView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
 
 @end
 
-@implementation testViewCtl
+@implementation oneNoteMainViewCtl
 
 
+- (void) initData{
+    
+    _dataSourceArray = [[NSMutableArray alloc] init];
+    
+}
+
+- (void) initTableView{
+    
+    DocPreviewCtl = [[docPreviewCtl alloc]init];
+    [DocPreviewCtl createTableContent];
+    self.tableView.dataSource = DocPreviewCtl;
+    self.tableView.delegate = DocPreviewCtl;
+    self.tableView.tableFooterView = [[UIView alloc]init];
+    
+}
 
 - (QMBTabsAppearance *)getDefaultAppearance
 {
-    QMBTabsAppearance *appearance = [super getDefaultAppearance];
-    
-    // Tabs
+    QMBTabsAppearance *appearance =  [[QMBTabsAppearance alloc] init];;
     
     [appearance setTabBackgroundColorHighlighted:[UIColor colorWithRed:242.0f/255.0f green:140.0f/255.0f blue:19.0f/255.0f alpha:1.0f]];
   //  [appearance setTabBackgroundColorEnabled:[UIColor redColor]];
@@ -40,22 +68,13 @@
     return appearance;
 }
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    /*
-    ONTabView * oTabView = [[ONTabView alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    oTabView.backgroundColor=[UIColor whiteColor];
-    [self.view addSubview:oTabView];
-    
-    UIViewController * newViewCtl = [[UIViewController alloc]init];
-    [self addViewController:newViewCtl withCompletion:^(ONTabView *tabItem) {
-        tabItem.titleLabel.text = [NSString stringWithFormat:@"Hello I'm a Tab! %d" , 1];
-        
-    }];
-     */
-    
+
     self.delegate = self;
+    
     
     for (int i = 0; i<3; i++) {
         UIViewController *viewController = [[UIViewController alloc]init];
@@ -64,18 +83,12 @@
            
         }];
     }
-    /*
-    UIViewController *viewController = [[UIViewController alloc]init];
-    [self addViewController:viewController withCompletion:^(QMBTab *tabItem) {
-        tabItem.titleLabel.text = @"+";
-        tabItem.highlightColor = [UIColor blueColor];
-        tabItem.normalColor    = [UIColor redColor];
-        
-    }];
-    */
+     
+    [self initTableView];
     
-    // Do any additional setup after loading the view.
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -89,20 +102,13 @@
  //   NSLog(@"Tab Changed to %d", [tabViewController indexForViewController:viewController]);
     NSUInteger tabIndex = [tabViewController indexForViewController:viewController];
     NSLog(@"Tab Changed to %lu", (unsigned long)tabIndex);
+    DocPreviewCtl.nsPage = tabIndex;
+    [self.tableView reloadData];
+    
  //   QMBTab *tab = (QMBTab*)self.tabBar.items[tabIndex];
     
 }
 
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

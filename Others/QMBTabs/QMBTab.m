@@ -39,6 +39,7 @@
             self.titleLabel = titleLabel;
             [self addSubview:self.titleLabel];
         }
+
         
         // close button
         if (!self.closeButton){
@@ -250,6 +251,7 @@
 
 - (void)layoutSubviews{
     [super layoutSubviews];
+  
 }
 
 - (void) setHighlighted:(BOOL)highlighted

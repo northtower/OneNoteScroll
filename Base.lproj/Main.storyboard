@@ -1,15 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="T8v-71-FMW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--One Note Main View Ctl-->
+        <scene sceneID="IJa-uM-mPl">
+            <objects>
+                <viewController storyboardIdentifier="SBID_OneNoteMain" id="xua-8n-YHO" customClass="oneNoteMainViewCtl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="p9g-rO-D4c"/>
+                        <viewControllerLayoutGuide type="bottom" id="wVw-8U-Xii"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="0v1-Xy-sPA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="8O7-ht-53C">
+                                <rect key="frame" x="0.0" y="44" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YND-i2-eK9">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <navigationItem title="读书笔记" id="Qwu-2A-VIo">
+                                        <barButtonItem key="leftBarButtonItem" image="simpleMenuButton.png" id="x7a-2c-ara"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="YND-i2-eK9" secondAttribute="trailing" constant="-16" id="3YS-kM-KJa"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="8O7-ht-53C" secondAttribute="bottom" id="4fq-Ie-3ro"/>
+                            <constraint firstItem="YND-i2-eK9" firstAttribute="leading" secondItem="0v1-Xy-sPA" secondAttribute="leadingMargin" constant="-16" id="P7Z-Oy-7Ld"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8O7-ht-53C" secondAttribute="trailing" constant="-16" id="QRP-t2-gaw"/>
+                            <constraint firstItem="YND-i2-eK9" firstAttribute="top" secondItem="0v1-Xy-sPA" secondAttribute="topMargin" id="jTy-db-2f9"/>
+                            <constraint firstItem="8O7-ht-53C" firstAttribute="leading" secondItem="0v1-Xy-sPA" secondAttribute="leadingMargin" constant="-16" id="oXC-sg-vQR"/>
+                            <constraint firstItem="8O7-ht-53C" firstAttribute="top" secondItem="YND-i2-eK9" secondAttribute="bottom" constant="44" id="zGi-Ag-jQB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="8O7-ht-53C" id="5XI-kN-7Iq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zZk-Jk-V9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1881" y="-1997"/>
+        </scene>
         <!--读书笔记-->
         <scene sceneID="5f9-oR-JDR">
             <objects>
-                <viewController id="wIw-zZ-Sgb" customClass="testViewCtl" sceneMemberID="viewController">
+                <viewController id="wIw-zZ-Sgb" customClass="oneNoteMainViewCtl" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iCF-xX-TXU"/>
                         <viewControllerLayoutGuide type="bottom" id="gdc-Ty-u5g"/>
@@ -169,12 +212,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c38-d8-lkF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1073" y="-463"/>
+            <point key="canvasLocation" x="1115" y="-463"/>
         </scene>
-        <!--View Controller-->
+        <!--Start Page View Ctl-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="startPageViewCtl" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -226,7 +269,6 @@
         <!--Navigation Controller-->
         <scene sceneID="gM1-J1-Me4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="J0P-aX-QYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="T8v-71-FMW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cmr-Q5-jgI">
@@ -238,6 +280,7 @@
                         <segue destination="wIw-zZ-Sgb" kind="relationship" relationship="rootViewController" id="MZk-bb-kvO"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J0P-aX-QYs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1073" y="-1265"/>
         </scene>

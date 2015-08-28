@@ -6,12 +6,14 @@
 //  Copyright (c) 2015年 northtower. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "startPageViewCtl.h"
 #import "Controller/LoginAndRegister/LoginViewCtl.h"
 
-#define SCREEN_WIDTH 320
 
-@interface ViewController ()<UIScrollViewDelegate>{
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
+@interface startPageViewCtl ()<UIScrollViewDelegate>{
     
     UIPageControl *_pageControl;
     NSInteger   _nsICurrentPage;
@@ -24,7 +26,7 @@
 @end
 
 
-@implementation ViewController
+@implementation startPageViewCtl
 
 
 -(void) addPageController{
@@ -33,7 +35,9 @@
     //注意此方法可以根据页数返回UIPageControl合适的大小
     CGSize size= [_pageControl sizeForNumberOfPages:3];
     _pageControl.bounds=CGRectMake(0, 0, size.width, size.height);
-    _pageControl.center=CGPointMake(160, 500);
+ //   _pageControl.center=CGPointMake(160, 500);
+    _pageControl.center=CGPointMake(SCREEN_WIDTH / 2, SCREEN_HEIGHT - 50);
+
     _pageControl.pageIndicatorTintColor=[UIColor colorWithRed:193/255.0 green:219/255.0 blue:249/255.0 alpha:1];
     
     //设置当前页颜色
@@ -80,16 +84,18 @@
     oImage.image = [UIImage imageNamed:@"063"];
     [_StartPageScroll addSubview:oImage];
     
-    //注册与登陆按钮
+    //注册与登陆按钮  注意在多尺寸设备中，按钮的位置要与图标一致
     UIButton *bLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bLoginBtn.frame = CGRectMake(oSize.width * 2, 289, SCREEN_WIDTH, 50);
+   
+    NSLog(@"%f" , SCREEN_HEIGHT / 1.96);
+    bLoginBtn.frame = CGRectMake(oSize.width * 2,  SCREEN_HEIGHT / 1.96, SCREEN_WIDTH, 50);
     bLoginBtn.backgroundColor = [UIColor clearColor];
     //   nameBtn.backgroundColor = [UIColor clearColor];
     [bLoginBtn addTarget:self action:@selector(userLoginView) forControlEvents:UIControlEventTouchUpInside];
     [_StartPageScroll addSubview:bLoginBtn];
     
     UIButton *bRegisterBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bRegisterBtn.frame = CGRectMake(oSize.width * 2, 289 + 50, SCREEN_WIDTH, 50);
+    bRegisterBtn.frame = CGRectMake(oSize.width * 2, SCREEN_HEIGHT / 1.96 + 50, SCREEN_WIDTH, 50);
     bRegisterBtn.backgroundColor = [UIColor clearColor];
     //   nameBtn.backgroundColor = [UIColor clearColor];
     [bRegisterBtn addTarget:self action:@selector(userRegisterView) forControlEvents:UIControlEventTouchUpInside];

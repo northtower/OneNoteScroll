@@ -32,6 +32,11 @@
 
 - (IBAction)loginAction:(UIButton *)sender {
     
+    UIStoryboard *storyboard = self.storyboard;
+    UIViewController * svc;
+    svc =[storyboard instantiateViewControllerWithIdentifier:@"SBID_OneNoteMain"];
+ //   [self.navigationController pushViewController:svc animated:YES];
+    [self presentModalViewController:svc animated:YES];
     
 }
 

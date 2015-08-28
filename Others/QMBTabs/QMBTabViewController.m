@@ -8,6 +8,8 @@
 
 #import "QMBTabViewController.h"
 
+#define TABLEHEIGHT 44
+
 @interface QMBTabViewController ()
 
 @property (nonatomic, strong) UIView *contentView;
@@ -20,6 +22,7 @@
 
 - (id) init
 {
+    NSLog(@"QMBTabViewController:init");
     self = [super init];
     
     if (self){
@@ -38,6 +41,9 @@
 
 - (void) setup
 {
+    
+    NSLog(@"QMBTabViewController: setup");
+    
     QMBTabsAppearance *appearance;
     if ([self.delegate respondsToSelector:@selector(tabViewControllerNeedsAppearance:)]){
         appearance = [self.delegate performSelector:@selector(tabViewControllerNeedsAppearance:) withObject:self];
@@ -56,6 +62,7 @@
 
 - (QMBTabsAppearance *)getDefaultAppearance
 {
+    NSLog(@"QMBTabViewController: getDefaultAppearance");
     return [[QMBTabsAppearance alloc] init];
 }
 
@@ -69,25 +76,31 @@
     
     if (!_tabBarTopOffset){
         // set default offset to statusbar height
-        _tabBarTopOffset = 0.0f;
+        _tabBarTopOffset = 0.0f;//44.0f;
     }
-
-    //warning 整个tabBar的高度为44
+    
+    NSLog(@"_tabBarTopOffset:%f" , _tabBarTopOffset);
+    
     [_tabBar setFrame:CGRectMake(0, _tabBarTopOffset,width, 44.0f)];
     
+    NSLog(@"_tabBar.frame.size.height + _tabBar.frame.origin.y:%f" , _tabBar.frame.size.height + _tabBar.frame.origin.y);
 
-    UIView *tabBarContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0,width, _tabBar.frame.size.height + _tabBar.frame.origin.y)];
+    UIView *tabBarContainer = [[UIView alloc] initWithFrame:CGRectMake(0, TABLEHEIGHT , width, _tabBar.frame.size.height + _tabBar.frame.origin.y )];
     [tabBarContainer setBackgroundColor:self.appearance.tabBarBackgroundColor];
     [tabBarContainer setAutoresizingMask:UIViewAutoresizingFlexibleWidth];
     [tabBarContainer addSubview:_tabBar];
     [self.view addSubview:tabBarContainer];
     
-    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, _tabBar.frame.size.height+_tabBarTopOffset, width, height-_tabBar.frame.size.height)];
+    
+    /*
+    NSLog(@"_tabBar.frame.size.height+_tabBarTopOffset:%f" , _tabBar.frame.size.height+_tabBarTopOffset);
+ //   UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, _tabBar.frame.size.height+_tabBarTopOffset, width, height-_tabBar.frame.size.height)];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, TABLEHEIGHT + TABLEHEIGHT, width, height-_tabBar.frame.size.height)];
     [contentView setClipsToBounds:YES];
     [contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
     [self.view addSubview:contentView];
     _contentView = contentView;
-     
+     */
 
 }
 
@@ -98,6 +111,9 @@
 
 
 - (void)addViewController:(UIViewController *)controller withCompletion:(void (^)(QMBTab *))completition {
+    
+    NSLog(@"QMBTabViewController: addViewController");
+    
     if ([_viewControllers containsObject:controller])
         return;
     
@@ -107,6 +123,8 @@
     
     [self addChildViewController:controller];
     [_viewControllers addObject:controller];
+
+    
     
     [_tabBar addTabItemWithCompletition:completition];
     
@@ -123,6 +141,7 @@
 
 - (void)removeViewController:(UIViewController *)controller
 {
+    NSLog(@"QMBTabViewController: removeViewController");
     
     [self.tabBar removeTabItem:[self.tabBar tabItemForIndex:[self indexForViewController:controller]]];
     // TODO: tabbar delegate will call this controller to delete the actual view controller - pretty dirty
@@ -130,11 +149,14 @@
 }
 
 - (void)selectViewController:(UIViewController *)controller{
+    
+    NSLog(@"QMBTabViewController: selectViewController");
+    
     UIViewController *current = self.selectedViewController;
     if (controller == self.selectedViewController)
         return;
 
-    controller.view.frame = CGRectMake(0,0,_contentView.frame.size.width, _contentView.frame.size.height);
+    controller.view.frame = CGRectMake(0,TABLEHEIGHT,_contentView.frame.size.width, _contentView.frame.size.height);
     if (controller.view.superview == nil){
         [controller.view setNeedsLayout];
         [controller.view setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
@@ -170,6 +192,8 @@
 
 - (void)tabBar:(QMBTabBar *)tabBar didChangeTabItem:(QMBTab *)tab{
     
+    NSLog(@"QMBTabViewController: didChangeTabItem");
+    
     BOOL select = YES;
     UIViewController *newViewController = [_viewControllers objectAtIndex:[tabBar indexForTabItem:tab]];
     
@@ -201,6 +225,7 @@
 
 - (void)tabBar:(QMBTabBar *)tabBar willRemoveTabItem:(QMBTab *)tab
 {
+    NSLog(@"QMBTabViewController: willRemoveTabItem");
     
     int removeIndex = [tabBar indexForTabItem:tab];
     UIViewController *controller = [_viewControllers objectAtIndex:removeIndex];
@@ -235,6 +260,8 @@
 
 - (QMBTabViewController*)tabViewController
 {
+    NSLog(@"QMBTabViewController: tabViewController");
+    
     UIViewController *parent = self;
     
     while ( nil != (parent = [parent parentViewController]) && ![parent isKindOfClass:[QMBTabViewController class]] )

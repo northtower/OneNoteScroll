@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "QMBTabViewController.h"
 
+
 //#import "Controller/ONTabViewCtl/ONTabViewCtl.h"
 
 
-@interface testViewCtl : QMBTabViewController<QMBTabViewControllerDelegate> // ONTabViewCtl
+@interface oneNoteMainViewCtl : QMBTabViewController<QMBTabViewControllerDelegate>
 
 @end
