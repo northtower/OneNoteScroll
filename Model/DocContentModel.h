@@ -16,9 +16,9 @@
 
 
 /**
- *  初始化微博数据
- *  @param createAt        创建日期
- *  @param source          来源
+ *  初始化文档正文
+ *  @param oHead
+ *  @param oBody
  *
  */
 - (DocContentModel *)initDocument:(NSString *)oHead WithBody:(NSString *) oBody;
@@ -26,13 +26,6 @@
 
 #pragma mark - 静态方法
 
-/**
- *  初始化文档展示数据
- *
- *  @param createAt        创建日期
- *  @param source          来源
- *
- */
 + (DocContentModel *)createDocHead:(NSString *)oHead withDocBody:(NSString *)oBody ;
 
 @end

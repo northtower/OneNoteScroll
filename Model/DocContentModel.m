@@ -11,8 +11,6 @@
 @implementation DocContentModel
 
 
-
-
 - (DocContentModel *)initDocument:(NSString *)oHead WithBody:(NSString *) oBody{
     
     if (self=[super init]) {
